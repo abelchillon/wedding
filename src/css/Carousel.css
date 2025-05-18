@@ -1,13 +1,14 @@
 .carousel-container {
   width: 100%;
   height: calc(100vh - 200px);
-  margin: 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .carousel-image {
   height: calc(100vh - 200px);
   position: relative;
-  border-radius: 0 0 20px 20px;
+  width: 100%;
   overflow: hidden;
   will-change: transform;
   backface-visibility: hidden;
@@ -18,9 +19,7 @@
   .carousel-container,
   .carousel-image {
     height: calc(100vh - 150px);
-  }
-  .carousel-content {
-    padding: 1rem;
+    position: relative;
   }
 }
 
