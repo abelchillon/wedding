@@ -22,8 +22,9 @@
     "react-scripts": "5.0.1"
   },
   "scripts": {
-    "start": "webpack serve --open --port 3000 --history-api-fallback",
-    "build": "tsc && webpack",
+    "start": "webpack serve --mode development --open --port 3000 --history-api-fallback",
+    "build": "webpack --mode production --output-path build",
+    "dev": "webpack serve --mode development",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
