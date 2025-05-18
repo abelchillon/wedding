@@ -9,6 +9,9 @@
   position: relative;
   border-radius: 0 0 20px 20px;
   overflow: hidden;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 @media (max-width: 768px) {
@@ -109,5 +112,20 @@
 
 .map-container:hover iframe {
   transform: scale(1.01);
+}
+
+.carousel-fade .carousel-item {
+  transition: opacity 0.3s ease !important;
+}
+
+.background-image {
+  transition: opacity 0.3s ease;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.carousel.slide {
+  will-change: transform;
+  transform: translateZ(0);
 }
 

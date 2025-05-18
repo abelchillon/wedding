@@ -127,6 +127,10 @@ img {
   left: 0;
   z-index: -1;
   object-fit: cover;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Media Queries */
@@ -139,9 +143,13 @@ img {
   
   .background-image {
     position: fixed;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     object-fit: cover;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: transform;
+    background-attachment: fixed;
   }
 
   h1 {
@@ -190,6 +198,11 @@ img {
 
   .background-image {
     height: 100vh;
+    width: 100vw;
+    position: fixed;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: transform;
   }
 
   .page-link {

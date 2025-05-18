@@ -1,12 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import { Carousel } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-// import image1 from '../images/abero.jpg';
-// import image2 from '../images/vero.jpg';
-// import image3 from '../images/abel.jpg';
 import abero from '../images/abero.jpg';
 import vero from '../images/vero.jpg';
 import abel from '../images/abel.jpg';
@@ -23,6 +20,14 @@ const images = [abero, vero, abel];
 
 const WeddingCarousel = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  
+  // Precargar imágenes
+  useEffect(() => {
+    images.forEach(imageUrl => {
+      const img = new Image();
+      img.src = imageUrl;
+    });
+  }, []);
 
   const handleSelect = (selectedIndex) => {
     setActiveIndex(selectedIndex);
@@ -38,6 +43,8 @@ const WeddingCarousel = () => {
       <Carousel
         activeIndex={activeIndex}
         onSelect={handleSelect}
+        interval={null}
+        fade={true}
         prevIcon={
           <FontAwesomeIcon icon={faChevronLeft} className="carousel-arrow" />
         }
@@ -46,8 +53,6 @@ const WeddingCarousel = () => {
         }
       >
         <Carousel.Item>
-          {/* <img className="d-block w-100" src={image1} alt="First slide" /> */}
-
           <div className="carousel-image">
             <div className="carousel-content">
               <h2>Verónica & Abel</h2>
