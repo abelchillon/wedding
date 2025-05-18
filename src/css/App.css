@@ -6,10 +6,16 @@
   color: #8b6b5d;
 }
 
+:root {
+  --background-image: url('../images/abero.jpg');
+}
+
 .hero-background {
   background-image:
     linear-gradient(rgba(232, 225, 213, 0.1), rgba(232, 225, 213, 0.2)),
-    url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+    var(--background-image);
+    /* url('../images/abero.jpg'); */
+    /* url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80'); */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
