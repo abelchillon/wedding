@@ -1,0 +1,65 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+  background-color: #e8e1d5;
+  font-family: 'Montserrat', sans-serif;
+  color: #8b6b5d;
+}
+
+.hero-background {
+  background-image:
+    linear-gradient(rgba(232, 225, 213, 0.1), rgba(232, 225, 213, 0.2)),
+    url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  position: relative;
+  padding: 80px 0 4rem;
+  transition: all 0.5s ease;
+}
+
+.hero-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(248, 241, 234, 0.2) 0%,
+    rgba(248, 241, 234, 0.1) 50%,
+    rgba(248, 241, 234, 0.3) 100%
+  );
+  pointer-events: none;
+}
+
+main {
+  padding: 2rem;
+}
+
+.content-background {
+  background-color: #f5f0ea;
+  padding: 3rem;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.wedding-footer {
+  padding: 2rem;
+  /* border-top: 1px solid rgba(255, 255, 255, 0.3); */
+  background-color: rgba(139, 107, 93, 0.95);
+  backdrop-filter: blur(5px);
+}
+
+.wedding-footer p {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  color: #ffffff;
+  font-weight: 400;
+  text-shadow: none;
+}
+
