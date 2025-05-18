@@ -14,8 +14,8 @@ pids
 *.pid.lock
 
 # Build
-dist/
-build/
+#dist/
+#build/
 
 # IDE
 .vscode/
