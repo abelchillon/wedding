@@ -72,7 +72,7 @@ const WeddingCarousel = () => {
                   rel="noopener noreferrer"
                   className="location-link"
                 >
-                  Hotel Urbisol - Calders
+                  Ajuntament de Palau-Solità i Plegamans
                 </a>
               </p>
               <div className="map-container">
