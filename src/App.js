@@ -35,7 +35,7 @@ function App() {
            Aquí irá el contenido adicional 
         </div>*/}
         <footer className="wedding-footer">
-          <p>Verónica & Abel - 2025</p>
+          <p>Verónica & Abel - Nuestra boda 2025</p>
         </footer>
       </div>
     </Router>
