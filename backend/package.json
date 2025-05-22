@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "migrate": "npx sequelize-cli db:migrate",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo",
+    "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
+    "prestart:prod": "npm run migrate"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -27,7 +31,8 @@
     "endOfLine": "crlf"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "sequelize-cli": "^6.6.3"
   },
   "author": "Your Name",
   "license": "MIT"
