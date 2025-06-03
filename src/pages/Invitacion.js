@@ -1,10 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../css/pages.css';
+import invitacionImg from '../images/invitacion.jpg';
 
 const Invitacion = () => {
   return (
-    <div className="page-container">
+    <div
+      className="page-container invitacion-bg"
+      style={{
+        backgroundImage: `linear-gradient(rgba(248,241,234,0.55), rgba(248,241,234,0.65)), url(${invitacionImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        minHeight: '100vh',
+      }}
+    >
       <h1>Vuestra Invitación</h1>
 
       <div className="page-content">

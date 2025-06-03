@@ -9,7 +9,9 @@
     "migrate": "npx sequelize-cli db:migrate",
     "migrate:undo": "npx sequelize-cli db:migrate:undo",
     "migrate:reset": "npx sequelize-cli db:migrate:undo:all && npm run migrate",
-    "prestart:prod": "npm run migrate"
+    "prestart:prod": "npm run migrate",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
+    "lint-fix": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix"
   },
   "dependencies": {
     "cors": "^2.8.5",

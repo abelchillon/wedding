@@ -11,10 +11,10 @@
 }
 
 .page-content {
-  max-width: 800px;
-  width: 90%;
+  max-width: 1100px;
+  width: 96%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 32px;
   background-color: rgba(255, 255, 255, 0.95);
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(139, 107, 93, 0.1);
@@ -135,6 +135,52 @@ img {
   -webkit-backface-visibility: hidden;
 }
 
+/* Estilos para la fecha y hora de la ceremonia */
+.ceremony-date-time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.ceremony-date-box {
+  background: #f7ede2;
+  border-radius: 12px;
+  padding: 1.5rem 2.5rem;
+  box-shadow: 0 2px 8px rgba(139,107,93,0.08);
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #8b6b5d;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.ceremony-date-hour {
+  font-size: 1.1rem;
+  color: #b08d6e;
+}
+
+.ceremony-map {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ceremony-map iframe {
+  border: 0;
+  border-radius: 12px;
+  margin: 1rem 0;
+  max-width: 500px;
+  width: 100%;
+  height: 300px;
+}
+
+.ceremony-map-link {
+  font-size: 0.95rem;
+  color: #8b6b5d;
+  margin-top: 0.5rem;
+}
+
 /* Media Queries */
 @media screen and (max-width: 768px) {
   .page-content {
@@ -227,6 +273,13 @@ img {
   .carousel-content h1,
   .carousel-content h2 {
     margin-top: 0;  /* No aplicar margen extra a títulos del carrusel */
+  }
+}
+
+@media (max-width: 1200px) {
+  .page-content {
+    max-width: 98vw;
+    padding: 20px;
   }
 }
 

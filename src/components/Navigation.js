@@ -54,7 +54,7 @@ const Navigation = () => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mx-auto" onClick={() => setExpanded(false)}>
           {[
-            { path: '/invitacion', name: 'Invitacion' },
+            { path: '/invitacion', name: 'Invitación' },
             { path: '/ceremonia', name: 'Ceremonia' },
             { path: '/celebracion', name: 'Celebración' },
             { path: '/fotos', name: 'Fotos' },
