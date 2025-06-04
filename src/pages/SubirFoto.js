@@ -126,9 +126,15 @@ const SubirFoto = () => {
 
         minHeight: '60vh',
 
+
+
         display: 'flex',
 
+
+
         alignItems: 'center',
+
+
 
         justifyContent: 'center',
 

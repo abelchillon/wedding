@@ -1,39 +1,22 @@
 const express = require('express');
 
+
+
 const router = express.Router();
 
-const Message = require('../models/message');
 
-// Get all messages
 
-router.get('/messages', async (req, res) => {
-  try {
-    const messages = await Message.findAll();
+const cloudinaryController = require('../controllers/cloudinaryController');
 
-    res.json(messages);
-  } catch (error) {
-    res.status(500).json({ error: 'Error al obtener mensajes' });
-  }
-});
 
-// Create a new message
 
-router.post('/messages', async (req, res) => {
-  try {
-    const { name, email, message } = req.body;
+// API para obtener imágenes de Cloudinary
 
-    const newMessage = await Message.create({ name, email, message });
 
-    res.status(201).json(newMessage);
-  } catch (error) {
-    res.status(400).json({ error: 'Error al crear mensaje' });
-  }
-});
 
-// Test route
+router.get('/fotos', cloudinaryController.listFotos);
 
-router.get('/hello', (req, res) => {
-  res.json({ message: 'Hola desde el backend!' });
-});
+
 
 module.exports = router;
+
