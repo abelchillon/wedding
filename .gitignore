@@ -20,3 +20,4 @@ pids
 # IDE
 .vscode/
 .idea/
+.env

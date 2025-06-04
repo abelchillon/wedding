@@ -18,6 +18,21 @@ const Regalos = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [modalImgIdx, setModalImgIdx] = useState(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  // Guardar posición del scroll cuando se abre el modal
+  const handleImageClick = (idx) => {
+    setScrollPosition(window.pageYOffset);
+    setModalImgIdx(idx);
+  };
+
+  // Restaurar posición del scroll cuando se cierra el modal
+  const handleCloseModal = () => {
+    setModalImgIdx(null);
+    setTimeout(() => {
+      window.scrollTo(0, scrollPosition);
+    }, 100);
+  };
 
   // Detectar si la URL tiene ?auto=1 y si es móvil, abrir uploader automáticamente
   useEffect(() => {
@@ -216,7 +231,7 @@ const Regalos = () => {
             justifyContent: 'center',
             zIndex: 1000,
           }}
-          onClick={() => setModalImgIdx(null)}
+          onClick={handleCloseModal}
         >
           {/* Botón anterior */}
           {fotos.length > 1 && (
@@ -285,7 +300,7 @@ const Regalos = () => {
             </button>
           )}
           <button
-            onClick={() => setModalImgIdx(null)}
+            onClick={handleCloseModal}
             style={{
               position: 'fixed',
               top: 24,
@@ -363,8 +378,9 @@ const Regalos = () => {
           style={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: 16,
+            gap: '8px',
             justifyContent: 'center',
+            padding: '0 8px',
           }}
         >
           {loading ? (
@@ -382,15 +398,19 @@ const Regalos = () => {
                   src={img.thumb}
                   alt={img.public_id}
                   style={{
-                    width: 180,
-                    height: 180,
+                    width: 'calc(20vw - 10px)',
+                    height: 'calc(20vw - 10px)',
+                    maxWidth: 150,
+                    maxHeight: 150,
+                    minWidth: 100,
+                    minHeight: 100,
                     objectFit: 'cover',
-                    borderRadius: 12,
+                    borderRadius: 8,
                     cursor: 'pointer',
                     transition: 'box-shadow 0.2s',
                     boxShadow: '0 2px 8px #0001',
                   }}
-                  onClick={() => setModalImgIdx(idx)}
+                  onClick={() => handleImageClick(idx)}
                 />
               </span>
             ))
