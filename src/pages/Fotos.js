@@ -61,6 +61,7 @@ const Fotos = () => {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('upload_preset', 'fotos_boda');
+      formData.append('folder', 'fotos'); // folder
 
       const response = await fetch(
         `https://api.cloudinary.com/v1_1/dyjw9xpgi/image/upload`,
