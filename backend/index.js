@@ -10,6 +10,10 @@ const dotenv = require('dotenv');
 
 
 
+const path = require('path');
+
+
+
 dotenv.config();
 
 
@@ -53,6 +57,30 @@ const corsOptions = {
 
 
 app.use(cors(corsOptions));
+
+
+
+// Serve static files from the public directory
+
+
+
+app.use(express.static(path.join(__dirname, '../public')));
+
+
+
+app.get('/favicon.ico', (req, res) => {
+
+  res.sendFile(path.join(__dirname, '../public/favicon.ico'));
+
+});
+
+
+
+app.get('/manifest.json', (req, res) => {
+
+  res.sendFile(path.join(__dirname, '../public/manifest.json'));
+
+});
 
 
 
