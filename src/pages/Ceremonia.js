@@ -69,7 +69,7 @@ const Ceremonia = () => {
             ></iframe> */}
             <p className="ceremony-map-link">
               <a
-                href="https://goo.gl/maps/2Qw8k8k8k8k8k8k8A"
+                href="https://maps.app.goo.gl/r5S9KESC6WDggqfD8"
                 target="_blank"
                 rel="noopener noreferrer"
               >

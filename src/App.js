@@ -38,9 +38,9 @@ function App() {
         <div className="content-background">
            Aquí irá el contenido adicional 
         </div>*/}
-        <footer className="wedding-footer">
+        {/* <footer className="wedding-footer">
           <p>Verónica & Abel - Nuestra boda 2025</p>
-        </footer>
+        </footer> */}
       </div>
     </Router>
   );

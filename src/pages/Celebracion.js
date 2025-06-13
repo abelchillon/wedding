@@ -53,7 +53,7 @@ const Celebracion = () => {
         ></iframe>
         <p className="ceremony-map-link" style={{ textAlign: 'center' }}>
           <a
-            href="https://goo.gl/maps/6Qw8k8k8k8k8k8k8A"
+            href="https://maps.app.goo.gl/XHdK1uoDw6QCd9Si8"
             target="_blank"
             rel="noopener noreferrer"
           >
