@@ -202,6 +202,8 @@ img {
   background-color: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(139, 107, 93, 0.15);
+  width: 100%;
+  max-width: 100%;
 }
 
 .rsvp-section h2 {
@@ -223,16 +225,21 @@ img {
 }
 
 .form-container {
-  margin-top: 1rem;
-  padding: 0.5rem;
-  background-color: rgba(255, 255, 255, 0.8);
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
   border-radius: 12px;
 }
 
 .form-container iframe {
+  width: 100%;
+  min-height: 1200px; /* Aumentamos la altura mínima */
+  border: none;
+  border-radius: 12px;
   background-color: transparent !important;
-  border-radius: 12px !important;
-  margin-top: 0.5rem;
+  box-shadow: none;
 }
 
 .highlight-text {
@@ -248,12 +255,18 @@ img {
 /* Media Queries */
 @media screen and (max-width: 768px) {
   .page-container {
-    padding: 12px;
+    padding: 0;
+    margin-top: 56px;
   }
 
   .page-content {
+    width: 100%;
+    margin: 0;
     padding: 16px;
-    margin-top: 0.5rem;
+    border-radius: 0;
+    min-height: calc(100vh - 56px);
+    box-shadow: none;
+    transform: none !important;
   }
 
   .ceremony-section,
@@ -275,6 +288,43 @@ img {
     font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 1rem;
+  }
+
+  .form-container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .form-container iframe {
+    min-height: 1000px; /* Altura específica para móvil */
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .rsvp-section {
+    padding: 0.5rem;
+    margin: 0;
+    width: 100vw;
+    max-width: 100vw;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .form-container {
+    width: 100vw;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+
+  .form-container iframe {
+    width: 100% !important;
+    min-height: 1000px;
+    border-radius: 0;
+  }
+
+  .page-content {
+    padding: 0;
   }
 }
 
@@ -341,6 +391,71 @@ img {
   .page-content {
     max-width: 98vw;
     padding: 20px;
+  }
+}
+
+/* Estilos móviles mejorados */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .page-container {
+    padding: 0;
+    margin-top: 56px;
+  }
+
+  .page-content {
+    width: 100%;
+    margin: 0;
+    padding: 16px;
+    border-radius: 0;
+    min-height: calc(100vh - 56px);
+    box-shadow: none;
+    transform: none !important;
+  }
+
+  .form-container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .form-container iframe {
+    min-height: calc(100vh - 200px);
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .form-container iframe {
+    height: 100%;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .rsvp-section {
+    padding: 0.5rem;
+    margin: 0;
+    width: 100vw;
+    max-width: 100vw;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .form-container {
+    width: 100vw;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+  }
+
+  .form-container iframe {
+    width: 100% !important;
+    min-height: 1000px;
+    border-radius: 0;
+  }
+
+  .page-content {
+    padding: 0;
   }
 }
 

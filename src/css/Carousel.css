@@ -203,25 +203,31 @@
 
 @media (max-width: 768px) {
   .carousel-container {
-    height: auto;
-    width: 90%;
-    max-width: 500px;
-    min-height: 400px;
-    max-height: 500px;
-    margin: 2rem auto;
-    display: flex;
-    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    height: calc(100vh - 56px);
+    margin: 0;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
   }
 
-  .carousel {
+  .carousel,
+  .carousel-inner,
+  .carousel-item,
+  .carousel-image {
+    height: 100%;
     width: 100%;
   }
 
-  .carousel-image,
   .carousel-content {
     height: 100%;
-    min-height: 400px;
-    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
   }
 
   .carousel h2 {

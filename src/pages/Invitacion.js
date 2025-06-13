@@ -16,9 +16,7 @@ const Invitacion = () => {
       }}
     >
       <div className="page-content">
-        {' '}
         <section className="rsvp-section">
-          {' '}
           <h2>Confirmación de Asistencia</h2>
           <p>
             Con gran ilusión esperamos poder compartir este día tan especial con
@@ -28,38 +26,22 @@ const Invitacion = () => {
           <div className="form-container">
             <iframe
               src="https://forms.gle/KXF1QoPyUZMG38s49"
-              width="100%"
-              height="800px"
               frameBorder="0"
               marginHeight="0"
               marginWidth="0"
-              style={{
-                backgroundColor: 'transparent',
-                borderRadius: '12px',
-                boxShadow: '0 4px 12px rgba(139, 107, 93, 0.1)',
-              }}
               title="Formulario de confirmación de asistencia"
+              style={{
+                width: '100%',
+                minHeight: '1200px',
+                border: 'none',
+                display: 'block',
+              }}
             >
               Cargando formulario...
             </iframe>
           </div>
         </section>
-        {/* <section className="invitation-section">
-          <h2>Queridos familiares y amigos</h2>
-          <p>
-            Con inmensa alegría y el corazón rebosante de ilusión, queremos
-            compartir con vosotros uno de los días más especiales de nuestras
-            vidas. Cada uno de vosotros habéis formado parte de nuestra historia
-            de amor de una manera única, y no podríamos imaginar este día tan
-            especial sin vuestra presencia.
-          </p>
-          <p>
-            Vuestra compañía hará que este momento sea aún más mágico y
-            memorable. Queremos crear recuerdos inolvidables rodeados de las
-            personas que más queremos, compartiendo risas, bailes y la felicidad
-            que caracteriza las grandes celebraciones.
-          </p>
-        </section> */}
+
         <section className="invitation-links">
           <h2>Información Importante</h2>
           <p>
@@ -81,7 +63,7 @@ const Invitacion = () => {
               Detalles de la Celebración
             </Link>
           </p>
-        </section>{' '}
+        </section>
       </div>
     </div>
   );
