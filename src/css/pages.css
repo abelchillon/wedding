@@ -13,16 +13,17 @@
 .page-content {
   max-width: 1100px;
   width: 96%;
-  margin: 0 auto;
-  padding: 32px;
+  margin: 1.5rem auto 0;
+  padding: 28px;
   background-color: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
+  border-radius: 15px 15px 0 0;
   box-shadow: 0 10px 30px rgba(139, 107, 93, 0.1);
   position: relative;
   overflow: hidden;
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
+  min-height: calc(100vh - 1.5rem);
 }
 
 .page-content:hover {
@@ -81,9 +82,9 @@ p {
 .invitation-links {
   text-align: center;
   background-color: rgba(248, 241, 234, 0.5);
-  padding: 2rem;
-  border-radius: 15px;
-  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-top: 1.5rem;
 }
 
 .link-container {
@@ -136,23 +137,36 @@ img {
 }
 
 /* Estilos para la fecha y hora de la ceremonia */
+.ceremony-section:first-child,
+.celebration-section:first-child {
+  margin-top: 1.5rem;
+}
+
+.ceremony-section h2,
+.celebration-section h2 {
+  margin-top: 0 !important;
+  margin-bottom: 1.5rem;
+}
+
 .ceremony-date-time {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .ceremony-date-box {
   background: #f7ede2;
   border-radius: 12px;
-  padding: 1.5rem 2.5rem;
+  padding: 1.25rem 2rem;
   box-shadow: 0 2px 8px rgba(139,107,93,0.08);
   font-size: 1.3rem;
   font-weight: bold;
   color: #8b6b5d;
   text-align: center;
   margin-bottom: 0.5rem;
+  width: 100%;
+  max-width: 400px;
 }
 
 .ceremony-date-hour {
@@ -181,12 +195,62 @@ img {
   margin-top: 0.5rem;
 }
 
+/* Estilos para la sección de RSVP */
+.rsvp-section {
+  margin-bottom: 2rem;
+  padding: 1.25rem 1.5rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(139, 107, 93, 0.15);
+}
+
+.rsvp-section h2 {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.rsvp-section p {
+  color: #5a4741;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-container {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+}
+
+.form-container iframe {
+  background-color: transparent !important;
+  border-radius: 12px !important;
+  margin-top: 0.5rem;
+}
+
+.highlight-text {
+  color: #8b6b5d;
+  font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+  font-weight: 500;
+  line-height: 1.8;
+  font-family: 'Playfair Display', serif;
+  text-align: center !important;
+  margin-bottom: 2rem !important;
+}
+
 /* Media Queries */
 @media screen and (max-width: 768px) {
   .page-content {
     width: 95%;
     padding: 15px;
-    margin-bottom: 2rem;
+    margin: 1.5rem auto;
   }
   
   .background-image {
@@ -204,20 +268,12 @@ img {
     background-attachment: fixed;
   }
 
-  h1 {
-    margin-top: 4rem;
-  }
-
   h2 {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
   }
 
   .invitation-section {
     margin-bottom: 1.5rem;
-  }
-
-  .page-content h1 {
-    margin-top: 2rem;
   }
 
   .page-content h2 {
@@ -235,17 +291,30 @@ img {
     padding: 10px;
   }
 
-  h1 {
-    margin-top: 4.5rem;
-  }
-
-  h2 {
-    margin-top: 2.25rem;
-  }
-
   .page-content {
     width: 100%;
-    padding: 10px;
+    padding: 20px 15px;
+    margin: 0.75rem auto 0;
+  }
+
+  .rsvp-section,
+  .ceremony-section,
+  .celebration-section {
+    padding: 1rem;
+  }
+
+  .ceremony-date-box {
+    padding: 1rem 1.5rem;
+    font-size: 1.2rem;
+  }
+
+  .invitation-links {
+    padding: 1.25rem;
+  }
+  
+  h2 {
+    margin-top: 0.75rem;
+    font-size: 1.6rem !important;
   }
 
   .background-image {

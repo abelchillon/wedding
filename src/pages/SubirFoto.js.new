@@ -1,0 +1,195 @@
+import React, { useState, useRef } from 'react';
+import '../css/pages.css';
+import '../css/SubirFoto.css';
+
+const cloudName = 'dyjw9xpgi';
+const uploadPreset = 'fotos_boda';
+
+const SubirFoto = () => {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
+  const fileInputRef = useRef(null);
+
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setError(null);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const uploadImage = async () => {
+    if (!selectedFile) return;
+
+    setLoading(true);
+    setError(null);
+
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+    formData.append('upload_preset', uploadPreset);
+    formData.append('folder', 'fotos');
+
+    try {
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        {
+          method: 'POST',
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Error al subir la imagen');
+      }
+
+      await response.json();
+      setSuccess(true);
+      setTimeout(() => {
+        window.location.href = '/fotos';
+      }, 1500);
+    } catch (err) {
+      setError('Error al subir la imagen. Por favor, inténtalo de nuevo.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const openCamera = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.accept = 'image/*';
+      fileInputRef.current.capture = 'environment';
+      fileInputRef.current.click();
+    }
+  };
+
+  const openFileSelector = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.accept = 'image/*';
+      fileInputRef.current.removeAttribute('capture');
+      fileInputRef.current.click();
+    }
+  };
+
+  return (
+    <div className="page-container">
+      <div className="page-content">
+        <div className="upload-container">
+          <h2>Comparte tus fotos de la boda</h2>
+          
+          {!selectedFile && (
+            <div className="upload-options">
+              <button className="upload-button" onClick={openCamera}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                  <path
+                    fillRule="evenodd"
+                    d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                Hacer una foto
+              </button>
+              
+              <button className="upload-button" onClick={openFileSelector}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                Seleccionar foto
+              </button>
+            </div>
+          )}
+
+          <input
+            type="file"
+            ref={fileInputRef}
+            className="file-input"
+            onChange={handleFileSelect}
+            accept="image/*"
+          />
+
+          {preview && (
+            <>
+              <div className="preview-container">
+                <img src={preview} alt="Preview" className="preview-image" />
+              </div>
+              
+              <div className="upload-options">
+                <button className="upload-button" onClick={uploadImage}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10.5 3.75a6 6 0 00-5.98 6.496A5.25 5.25 0 006.75 20.25H18a4.5 4.5 0 002.206-8.423 3.75 3.75 0 00-4.133-4.303A6.001 6.001 0 0010.5 3.75zm2.03 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v4.94a.75.75 0 001.5 0v-4.94l1.72 1.72a.75.75 0 101.06-1.06l-3-3z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Subir foto
+                </button>
+                <button 
+                  className="upload-button" 
+                  onClick={() => {
+                    setSelectedFile(null);
+                    setPreview(null);
+                  }}
+                  style={{ background: '#dc3545' }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  Cancelar
+                </button>
+              </div>
+            </>
+          )}
+
+          {error && <p className="error-message">{error}</p>}
+          {success && (
+            <p className="success-message">
+              ¡Foto subida correctamente! Redirigiendo a la galería...
+            </p>
+          )}
+        </div>
+      </div>
+
+      {loading && (
+        <div className="loading-overlay">
+          <div className="loading-spinner"></div>
+          <p>Subiendo foto...</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default SubirFoto;

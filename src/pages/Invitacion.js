@@ -15,10 +15,36 @@ const Invitacion = () => {
         minHeight: '100vh',
       }}
     >
-      <h1>Vuestra Invitación</h1>
-
       <div className="page-content">
-        <section className="invitation-section">
+        {' '}
+        <section className="rsvp-section">
+          {' '}
+          <h2>Confirmación de Asistencia</h2>
+          <p>
+            Con gran ilusión esperamos poder compartir este día tan especial con
+            vosotros. Para ayudarnos con los preparativos, ¿podríais
+            confirmarnos vuestra asistencia?
+          </p>
+          <div className="form-container">
+            <iframe
+              src="https://forms.gle/KXF1QoPyUZMG38s49"
+              width="100%"
+              height="800px"
+              frameBorder="0"
+              marginHeight="0"
+              marginWidth="0"
+              style={{
+                backgroundColor: 'transparent',
+                borderRadius: '12px',
+                boxShadow: '0 4px 12px rgba(139, 107, 93, 0.1)',
+              }}
+              title="Formulario de confirmación de asistencia"
+            >
+              Cargando formulario...
+            </iframe>
+          </div>
+        </section>
+        {/* <section className="invitation-section">
           <h2>Queridos familiares y amigos</h2>
           <p>
             Con inmensa alegría y el corazón rebosante de ilusión, queremos
@@ -33,8 +59,7 @@ const Invitacion = () => {
             personas que más queremos, compartiendo risas, bailes y la felicidad
             que caracteriza las grandes celebraciones.
           </p>
-        </section>
-
+        </section> */}
         <section className="invitation-links">
           <h2>Información Importante</h2>
           <p>
@@ -49,14 +74,14 @@ const Invitacion = () => {
 
           <p>
             Para información sobre el banquete, la fiesta y opciones de
-            alojamiento, os invitamos a consultar:
+            alojamiento:
           </p>
           <p className="link-container">
             <Link to="/celebracion" className="page-link">
               Detalles de la Celebración
             </Link>
           </p>
-        </section>
+        </section>{' '}
       </div>
     </div>
   );

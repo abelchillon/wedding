@@ -14,8 +14,6 @@ const Ceremonia = () => {
         minHeight: '100vh',
       }}
     >
-      <h1>La Ceremonia</h1>
-
       <div className="page-content">
         <section className="ceremony-section">
           <h2 style={{ textAlign: 'center' }}>Fecha y Hora</h2>

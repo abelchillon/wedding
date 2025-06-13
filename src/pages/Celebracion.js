@@ -14,7 +14,6 @@ const Celebracion = () => {
         minHeight: '100vh',
       }}
     >
-      <h1>La Celebración</h1>
       <div className="page-content">
         <section className="celebration-section">
           <h2 style={{ textAlign: 'center' }}>Ubicación y Hora</h2>
