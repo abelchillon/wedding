@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -8,6 +8,7 @@ const Navigation = () => {
   const [expanded, setExpanded] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,14 +20,30 @@ const Navigation = () => {
       }
     };
 
+    const handleClickOutside = (event) => {
+      if (
+        expanded &&
+        navRef.current &&
+        !navRef.current.contains(event.target)
+      ) {
+        setExpanded(false);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
     };
-  }, []);
+  }, [expanded]);
 
   return (
     <Navbar
+      ref={navRef}
       expanded={expanded}
       expand="lg"
       className={`wedding-nav ${scrolled ? 'scrolled' : ''}`}

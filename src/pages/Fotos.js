@@ -1,24 +1,28 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
-import {
-  FileUploaderRegular,
-  FileUploaderMinimal,
-} from '@uploadcare/react-uploader';
 import { getFotosCloudinary } from '../services/api';
+import PhotoUploader from '../components/PhotoUploader';
 
 import '../css/pages.css';
-import '@uploadcare/react-uploader/core.css';
 
-// const cloudName = 'dyjw9xpgi';
-// const uploadPreset = 'fotos_boda'; // Puedes configurar uno personalizado en Cloudinary
-
-const Regalos = () => {
-  const uploadcareRef = useRef(null);
+const Fotos = () => {
+  const photoUploaderRef = useRef();
   const [fotos, setFotos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [modalImgIdx, setModalImgIdx] = useState(null);
   const [scrollPosition, setScrollPosition] = useState(0);
+
+  // Detectar parámetro en la URL para abrir la cámara
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('camera') === '1') {
+      // Pequeño delay para asegurar que el componente está montado
+      setTimeout(() => {
+        photoUploaderRef.current?.openCamera();
+      }, 500);
+    }
+  }, []);
 
   // Guardar posición del scroll cuando se abre el modal
   const handleImageClick = (idx) => {
@@ -33,84 +37,6 @@ const Regalos = () => {
       window.scrollTo(0, scrollPosition);
     }, 100);
   };
-
-  // Detectar si la URL tiene ?auto=1 y si es móvil, abrir uploader automáticamente
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const isMobile =
-      /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(
-        navigator.userAgent
-      );
-    // Abrir automáticamente Uploadcare si ?auto=1
-    if (params.get('auto') === '1' && isMobile && uploadcareRef.current) {
-      if (typeof uploadcareRef.current.openDialog === 'function') {
-        uploadcareRef.current.openDialog();
-      }
-    }
-    // Abrir automáticamente Cloudinary si ?cloudinary=1 y es móvil
-    if (params.get('cloudinary') === '1' && isMobile) {
-      function launchWidget() {
-        if (window.cloudinary && window.cloudinary.openUploadWidget) {
-          window.cloudinary.openUploadWidget(
-            {
-              cloudName: 'dyjw9xpgi',
-              uploadPreset: 'fotos_boda',
-              folder: 'fotos',
-              sources: ['local', 'camera'],
-              cropping: false,
-              multiple: true,
-              defaultSource: 'camera',
-              styles: {
-                palette: {
-                  window: '#fff',
-                  sourceBg: '#f4f4f5',
-                  windowBorder: '#90a0b3',
-                  tabIcon: '#e05a47',
-                  inactiveTabIcon: '#69778A',
-                  menuIcons: '#e05a47',
-                  link: '#e05a47',
-                  action: '#e05a47',
-                  inProgress: '#e05a47',
-                  complete: '#20B832',
-                  error: '#c43737',
-                  textDark: '#000000',
-                  textLight: '#fcfffd',
-                },
-              },
-            },
-            (error, result) => {
-              // Si la subida fue exitosa, recargar fotos
-              if (!error && result && result.event === 'success') {
-                setLoading(true);
-                getFotosCloudinary()
-                  .then(setFotos)
-                  .catch((err) => setError(err.message))
-                  .finally(() => setLoading(false));
-              }
-            }
-          );
-        } else {
-          // Si el widget aún no está disponible, reintenta hasta que cargue
-          const interval = setInterval(() => {
-            if (window.cloudinary && window.cloudinary.openUploadWidget) {
-              clearInterval(interval);
-              launchWidget();
-            }
-          }, 300);
-        }
-      }
-      // Cargar el script solo si no existe
-      if (!document.getElementById('cloudinary-widget-script')) {
-        const script = document.createElement('script');
-        script.id = 'cloudinary-widget-script';
-        script.src = 'https://widget.cloudinary.com/v2.0/global/all.js';
-        script.onload = launchWidget;
-        document.body.appendChild(script);
-      } else {
-        launchWidget();
-      }
-    }
-  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -130,87 +56,36 @@ const Regalos = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Recargar fotos tras subir una imagen con el widget
-  const openCloudinaryWidget = () => {
-    // Asegura que el script de Cloudinary esté cargado antes de llamar al widget
-    function launchWidget() {
-      if (window.cloudinary && window.cloudinary.openUploadWidget) {
-        window.cloudinary.openUploadWidget(
-          {
-            cloudName: 'dyjw9xpgi',
-            uploadPreset: 'fotos_boda',
-            folder: 'fotos',
-            sources: ['camera', 'local'],
-            cropping: false,
-            multiple: false,
-            defaultSource: 'camera',
-            showCompletedButton: true,
-            showPoweredBy: false,
-            resourceType: 'image',
-            styles: {
-              palette: {
-                window: '#fff',
-                sourceBg: '#f4f4f5',
-                windowBorder: '#90a0b3',
-                tabIcon: '#e05a47',
-                inactiveTabIcon: '#69778A',
-                menuIcons: '#e05a47',
-                link: '#e05a47',
-                action: '#e05a47',
-                inProgress: '#e05a47',
-                complete: '#20B832',
-                error: '#c43737',
-                textDark: '#000000',
-                textLight: '#fcfffd',
-              },
-              fonts: {
-                default: null,
-                'sans-serif': {
-                  url: null,
-                  active: true,
-                },
-              },
-            },
-            text: {
-              'sources.camera.title': 'Hacer foto',
-              'sources.local.title': 'Subir desde galería',
-              'menu.cancel': 'Cancelar',
-              'menu.done': 'Listo',
-              'menu.upload': 'Subir foto',
-              'menu.back': 'Atrás',
-              'menu.files': 'Mis fotos',
-            },
-          },
-          (error, result) => {
-            // Si la subida fue exitosa, recargar fotos
-            if (!error && result && result.event === 'success') {
-              setLoading(true);
-              getFotosCloudinary()
-                .then(setFotos)
-                .catch((err) => setError(err.message))
-                .finally(() => setLoading(false));
-            }
-          }
-        );
-      } else {
-        // Si el widget aún no está disponible, reintenta hasta que cargue
-        const interval = setInterval(() => {
-          if (window.cloudinary && window.cloudinary.openUploadWidget) {
-            clearInterval(interval);
-            launchWidget();
-          }
-        }, 300);
+  const handlePhotoSelected = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', 'fotos_boda');
+
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/dyjw9xpgi/image/upload`,
+        {
+          method: 'POST',
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Error al subir la imagen');
       }
-    }
-    // Cargar el script solo si no existe
-    if (!document.getElementById('cloudinary-widget-script')) {
-      const script = document.createElement('script');
-      script.id = 'cloudinary-widget-script';
-      script.src = 'https://widget.cloudinary.com/v2.0/global/all.js';
-      script.onload = launchWidget;
-      document.body.appendChild(script);
-    } else {
-      launchWidget();
+
+      const data = await response.json();
+
+      // Recargar fotos después de subir
+      setLoading(true);
+      const newFotos = await getFotosCloudinary();
+      setFotos(newFotos);
+      setLoading(false);
+
+      return data;
+    } catch (error) {
+      console.error('Error:', error);
+      throw error;
     }
   };
 
@@ -325,7 +200,7 @@ const Regalos = () => {
           style={{ textAlign: 'center', marginBottom: 32 }}
         >
           <h2 style={{ marginTop: '20px' }}>
-            Escanea el QR o click en "¡Sube tu Foto!"{' '}
+            Escanea el QR o usa los botones para subir una foto
           </h2>
 
           <div
@@ -338,30 +213,17 @@ const Regalos = () => {
           >
             <QRCodeCanvas
               value={
-                window.location.origin +
-                window.location.pathname +
-                '?cloudinary=1'
+                window.location.origin + window.location.pathname + '?camera=1'
               }
               size={180}
             />
-            <button
-              type="button"
-              style={{
-                background: '#e05a47',
-                color: 'white',
-                border: 'none',
-                borderRadius: 8,
-                padding: '12px 28px',
-                cursor: 'pointer',
-                fontSize: 18,
-                fontWeight: 600,
-                marginTop: 12,
-                boxShadow: '0 2px 8px #0001',
-              }}
-              onClick={openCloudinaryWidget}
-            >
-              ¡Sube tu Foto!
-            </button>
+            <PhotoUploader
+              ref={photoUploaderRef}
+              onPhotoSelected={handlePhotoSelected}
+              onUploadStart={() => setLoading(true)}
+              onUploadComplete={() => setLoading(false)}
+              onError={(error) => setError(error.message)}
+            />
           </div>
           <p
             style={{
@@ -425,4 +287,4 @@ const Regalos = () => {
   );
 };
 
-export default Regalos;
+export default Fotos;

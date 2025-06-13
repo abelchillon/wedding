@@ -8,6 +8,7 @@
   backdrop-filter: blur(10px);
   max-width: 100%;
   margin: 0 auto;
+  will-change: transform;
 }
 
 .page-content {
@@ -24,11 +25,25 @@
     transform 0.3s ease,
     box-shadow 0.3s ease;
   min-height: calc(100vh - 1rem);
+  animation: fadeInUp 0.8s ease;
+  transform-origin: bottom;
+  backface-visibility: hidden;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .page-content:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(139, 107, 93, 0.15);
+  box-shadow: 0 15px 35px rgba(139, 107, 93, 0.15);
 }
 
 .page-content::before {
@@ -58,10 +73,9 @@ h2 {
   margin-bottom: 1rem;
   font-size: clamp(1.4rem, 3vw, 2rem);
   margin-top: 2rem;
-}
-
-section {
-  margin-bottom: 3rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  line-height: 1.4;
 }
 
 p {
@@ -71,6 +85,34 @@ p {
   margin-bottom: 1.5rem;
   font-size: clamp(1rem, 2vw, 1.2rem);
   text-align: justify;
+}
+
+/* Aplicamos las animaciones solo a elementos dentro de page-content */
+.page-content h2:not(.no-animate) {
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards 0.3s;
+}
+
+.page-content p:not(.no-animate) {
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards 0.5s;
+}
+
+/* Los elementos del carrusel no deben tener animación de fade */
+.carousel-content h2,
+.carousel-content p {
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+/* Añadimos la animación fadeIn para los elementos que la necesiten */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .invitation-section {
@@ -105,9 +147,45 @@ p {
   font-size: clamp(0.9rem, 1.5vw, 1.1rem);
 }
 
-.page-link:hover {
-  background-color: #666;
-  color: #fff;
+.button, 
+button:not(.navbar-toggler),
+a.btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(139, 107, 93, 0.1);
+  border: 2px solid rgba(139, 107, 93, 0.2);
+  padding: 12px 28px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.button:before,
+button:not(.navbar-toggler):before,
+a.btn:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button:hover:before,
+button:not(.navbar-toggler):hover:before,
+a.btn:hover:before {
+  transform: translateX(0);
+}
+
+.button:hover,
+button:not(.navbar-toggler):hover,
+a.btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(139, 107, 93, 0.2);
 }
