@@ -67,7 +67,7 @@ const WeddingCarousel = () => {
         <Carousel.Item>
           <div className="carousel-image">
             <div className="carousel-content">
-              <h2 style={{ marginBottom: '0px' }}>Verónica & Abel</h2>
+              <h2 style={{ marginBottom: '0px' }}>Verónica & Abel 💑</h2>
               <h2 style={{ marginTop: '10px' }}>02 de Agosto, 25</h2>
               <Link to="/invitacion" className="carousel-link">
                 Ver Invitación
@@ -79,7 +79,7 @@ const WeddingCarousel = () => {
         <Carousel.Item>
           <div className="carousel-image">
             <div className="carousel-content">
-              <h2>Ceremonia</h2>
+              <h2>Ceremonia ✨</h2>
               <h2>17:00h</h2>
               <div className="location-wrapper">
                 <p>
@@ -107,7 +107,7 @@ const WeddingCarousel = () => {
         <Carousel.Item>
           <div className="carousel-image">
             <div className="carousel-content">
-              <h2>Celebración</h2>
+              <h2>Celebración 🎉</h2>
               <h2>19:00h</h2>
               <div className="location-wrapper">
                 <p>

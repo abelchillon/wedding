@@ -43,7 +43,7 @@
 
 /* Aseguramos que los elementos del carrusel sean visibles */
 .carousel-content h2 {
-  color: #fff !important;
+  color: #f8f0e9 !important;
   opacity: 1 !important;
   margin: 0.5rem 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);

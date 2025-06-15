@@ -16,6 +16,8 @@ const habitaciones = [
   { src: hab2, alt: 'Habitación 2' },
 
   { src: hab3, alt: 'Habitación 3' },
+
+  { src: piscina, alt: 'Piscina' },
 ];
 
 const Alojamiento = () => {
@@ -52,8 +54,6 @@ const Alojamiento = () => {
 
     return () => window.removeEventListener('keydown', handleKey);
   }, [modalImgIdx]);
-
-  const handleImageClick = (idx) => setModalImgIdx(idx);
 
   const handleCloseModal = () => setModalImgIdx(null);
 
@@ -127,16 +127,8 @@ const Alojamiento = () => {
           )}
 
           <img
-            src={
-              modalImgIdx === 'piscina'
-                ? piscina
-                : habitaciones[modalImgIdx].src
-            }
-            alt={
-              modalImgIdx === 'piscina'
-                ? 'Piscina ampliada'
-                : habitaciones[modalImgIdx].alt
-            }
+            src={habitaciones[modalImgIdx].src}
+            alt={habitaciones[modalImgIdx].alt}
             style={{
               maxWidth: '90vw',
 
@@ -229,70 +221,87 @@ const Alojamiento = () => {
           </p>
           <div
             style={{
-              display: 'flex',
-
-              flexWrap: 'wrap',
-
-              gap: 12,
-
-              justifyContent: 'center',
-
-              alignItems: 'center',
-
-              marginBottom: 24,
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+              gap: '15px',
+              marginBottom: '20px',
+              padding: '10px',
             }}
           >
-            {[...habitaciones, { src: piscina, alt: 'Piscina' }].map(
-              (img, idx) => (
-                <img
-                  key={idx}
-                  src={img.src}
-                  alt={img.alt}
-                  style={{
-                    width: 140,
+            {[...habitaciones].map((img, idx) => (
+              <img
+                key={img.alt}
+                src={img.src}
+                alt={img.alt}
+                style={{
+                  width: '100%',
 
-                    height: 95,
+                  aspectRatio: '3/2',
 
-                    objectFit: 'cover',
+                  objectFit: 'cover',
 
-                    borderRadius: 10,
+                  borderRadius: '12px',
 
-                    boxShadow: '0 2px 8px #0001',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
 
-                    cursor: 'pointer',
+                  cursor: 'pointer',
 
-                    transition: 'box-shadow 0.2s',
-                  }}
-                  onClick={() =>
-                    setModalImgIdx(idx < habitaciones.length ? idx : 'piscina')
-                  }
-                />
-              )
-            )}
+                  transition: 'all 0.3s ease',
+
+                  transform: 'scale(1)',
+
+                  '&:hover': {
+                    transform: 'scale(1.02)',
+
+                    boxShadow: '0 6px 16px rgba(0,0,0,0.15)',
+                  },
+                }}
+                onClick={() =>
+                  setModalImgIdx(idx < habitaciones.length ? idx : 'piscina')
+                }
+              />
+            ))}
           </div>
-          <p style={{ fontSize: 15, textAlign: 'center', marginBottom: 0 }}>
-            Recuerda traer bañador para la piscina.
+          <p
+            style={{
+              fontSize: '15px',
+
+              textAlign: 'center',
+
+              marginBottom: '20px',
+
+              color: '#666',
+
+              fontStyle: 'italic',
+            }}
+          >
+            ¡No te olvides el bañador para disfrutar de la piscina! 🏊‍♂️
           </p>
         </section>
         <section className="rsvp-section">
-          <h2>Confirmación de Alojamiento</h2>
-          <p style={{ marginBottom: 12 }}>
-            ¿Vas a necesitar habitación? Por favor, confírmalo aquí:
+          <h2>¡Tu habitación te espera! 🏨✨</h2>
+          <p>
+            Hemos preparado todo para que disfrutes de una estancia maravillosa
+            en el Hotel Urbisol. Aquí podrás relajarte y disfrutar al máximo de
+            nuestra celebración, ¡incluyendo un chapuzón en la piscina! 🏊‍♂️
+          </p>
+          <h1 style={{ marginTop: '30px' }}>Reserva tu habitación 🛏️</h1>
+          <p style={{ marginBottom: '20px' }}>
+            Para que podamos organizarlo todo perfectamente, por favor, confirma
+            tu hospedaje en el formulario. ¡Gracias! 💝
           </p>
           <div className="form-container">
             <iframe
               src="https://forms.gle/ZMEdNHbatyZtnxVXA"
-              width="100%"
-              height="600px"
-              frameBorder="0"
-              marginHeight="0"
-              marginWidth="0"
+              // frameBorder="0"
+              // marginHeight="0"
+              // marginWidth="0"
               style={{
-                backgroundColor: 'transparent',
-
-                borderRadius: '12px',
-
-                boxShadow: '0 4px 12px rgba(139, 107, 93, 0.1)',
+                width: '100%',
+                minHeight: '922px',
+                // border: '1px solid #ccc',
+                display: 'block',
+                overflow: 'hidden',
               }}
               title="Formulario de confirmación de alojamiento"
             >

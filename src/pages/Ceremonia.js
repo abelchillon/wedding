@@ -15,67 +15,143 @@ const Ceremonia = () => {
       }}
     >
       <div className="page-content">
-        <section className="ceremony-section">
-          <h2 style={{ textAlign: 'center' }}>Fecha y Hora</h2>
+        <section
+          className="ceremony-section"
+          style={{
+            background: 'rgba(255,255,255,0.9)',
+            padding: '25px',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(139, 107, 93, 0.1)',
+            marginBottom: '30px',
+          }}
+        >
+          <h2 style={{ textAlign: 'center', color: '#8B6B5D' }}>
+            Fecha y Hora ⏰
+          </h2>
           <div className="ceremony-date-time">
-            <div className="ceremony-date-box">
-              Sábado, 2 de Agosto de 2025
+            <div
+              className="ceremony-date-box"
+              style={{
+                fontSize: '18px',
+                lineHeight: '1.6',
+                textAlign: 'center',
+                padding: '20px',
+                background: 'rgba(139, 107, 93, 0.1)',
+                borderRadius: '8px',
+              }}
+            >
+              📅 Sábado, 2 de Agosto de 2025
               <br />
-              <span className="ceremony-date-hour">
-                Comienza a las <b>17:00h</b>
+              <span
+                className="ceremony-date-hour"
+                style={{
+                  display: 'block',
+                  marginTop: '10px',
+                  color: '#8B6B5D',
+                }}
+              >
+                Comienza a las <b>17:00h</b> ⌚
               </span>
             </div>
           </div>
         </section>
 
-        <section className="ceremony-section">
-          <h2>Ubicación</h2>
-          <p style={{ textAlign: 'center', fontWeight: '500' }}>
+        <section
+          className="ceremony-section"
+          style={{
+            background: 'rgba(255,255,255,0.9)',
+            padding: '25px',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(139, 107, 93, 0.1)',
+            marginBottom: '30px',
+          }}
+        >
+          <h2 style={{ textAlign: 'center', color: '#8B6B5D' }}>
+            Sobre la ceremonia ✨
+          </h2>
+          <p
+            style={{
+              fontSize: '17px',
+              lineHeight: '1.6',
+              textAlign: 'center',
+            }}
+          >
+            La ceremonia se celebrará en la sala de actos del ayuntamiento de
+            Palau-Solità i Plegamans, un espacio emblemático y acogedor donde
+            compartiremos este momento tan especial junto a nuestros seres
+            queridos. 💫
+          </p>
+        </section>
+
+        <section
+          className="ceremony-section"
+          style={{
+            background: 'rgba(255,255,255,0.9)',
+            padding: '25px',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(139, 107, 93, 0.1)',
+          }}
+        >
+          <h2
+            style={{
+              textAlign: 'center',
+              color: '#8B6B5D',
+              marginBottom: '20px',
+            }}
+          >
+            Ubicación 📍
+          </h2>
+          <p
+            style={{
+              textAlign: 'center',
+              fontWeight: '500',
+              fontSize: '17px',
+              lineHeight: '1.6',
+              marginBottom: '20px',
+            }}
+          >
             Sala de actos del Ayuntamiento de Palau-Solità i Plegamans
             <br />
             Plaça de la Vila, 1, 08184 Palau-solità i Plegamans, Barcelona
           </p>
-        </section>
 
-        <section className="ceremony-section">
-          <h2>Descripción</h2>
-          <p>
-            La ceremonia se celebrará en la sala de actos del ayuntamiento de
-            Palau-Solità i Plegamans, un espacio emblemático y acogedor donde
-            compartiremos este momento tan especial junto a nuestros seres
-            queridos.
-          </p>
-        </section>
-
-        <section className="ceremony-section">
-          <h2>Cómo llegar</h2>
           <iframe
-            title="ajuntament-map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11936.404860768971!2d2.16601767310146!3d41.588693053951296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4c0793318b5fb%3A0x27396529788c4a4!2sAjuntament%20de%20Palau-solita%20i%20Plegamans!5e0!3m2!1ses!2ses!4v1747397015674!5m2!1ses!2ses"
+            title="ayuntamiento-map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2983.826551091424!2d2.1809116765164826!3d41.58774738689287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4c7c34f6d531b%3A0x50586c7057a043d4!2sAjuntament%20de%20Palau-solit%C3%A0%20i%20Plegamans!5e0!3m2!1ses!2ses!4v1687649271010!5m2!1ses!2ses"
             width="100%"
             height="450"
-            style={{ borde: 0 }}
-            allowfullscreen=""
+            style={{
+              border: '0',
+              borderRadius: '8px',
+              boxShadow: '0 4px 12px rgba(139, 107, 93, 0.1)',
+              marginBottom: '20px',
+            }}
+            allowFullScreen=""
             loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
-          <div className="ceremony-map">
-            {/* <iframe
-              title="Mapa Ceremonia"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2992.964964073839!2d2.177135315422839!3d41.6022229792437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a495e2e2e2e2e2%3A0x123456789abcdef!2sPla%C3%A7a%20de%20la%20Vila%2C%201%2C%2008184%20Palau-solit%C3%A0%20i%20Plegamans%2C%20Barcelona!5e0!3m2!1ses!2ses!4v1685555555555!5m2!1ses!2ses"
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe> */}
-            <p className="ceremony-map-link">
-              <a
-                href="https://maps.app.goo.gl/r5S9KESC6WDggqfD8"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Ver en Google Maps
-              </a>
-            </p>
+          />
+
+          <div
+            style={{
+              textAlign: 'center',
+            }}
+          >
+            <a
+              href="https://maps.google.com/?q=Ayuntamiento+de+Palau-Solità+i+Plegamans"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-block',
+                padding: '12px 24px',
+                background: 'rgba(139, 107, 93, 0.1)',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                color: '#8B6B5D',
+                fontWeight: '500',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              Abrir en Google Maps 🗺️
+            </a>
           </div>
         </section>
       </div>

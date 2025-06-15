@@ -17,24 +17,48 @@ const Invitacion = () => {
     >
       <div className="page-content">
         <section className="rsvp-section">
-          <h2>Confirmación de Asistencia</h2>
-          <p>
-            Con gran ilusión esperamos poder compartir este día tan especial con
-            vosotros. Para ayudarnos con los preparativos, ¿podríais
-            confirmarnos vuestra asistencia?
+          <h2>¡Nos casamos! 💑✨</h2>
+          <p style={{ fontSize: '17px', lineHeight: '1.6' }}>
+            Con inmensa alegría e ilusión os invitamos a compartir con nosotros
+            uno de los días más especiales de nuestra vida. 💝
           </p>
+          <p
+            style={{
+              fontSize: '17px',
+              lineHeight: '1.6',
+              background: 'rgba(255,255,255,0.8)',
+              padding: '15px',
+              borderRadius: '12px',
+              boxShadow: '0 4px 12px rgba(139, 107, 93, 0.1)',
+            }}
+          >
+            Vuestra presencia hará que este momento sea aún más mágico. ¡Nos
+            hace muchísima ilusión contar con vosotros en nuestra boda! 🎉
+          </p>
+
+          <h1
+            style={{
+              marginTop: '30px',
+              fontSize: '24px',
+              color: '#8B6B5D',
+            }}
+          >
+            Detalles importantes 📝
+          </h1>
+
           <div className="form-container">
             <iframe
               src="https://forms.gle/KXF1QoPyUZMG38s49"
-              frameBorder="0"
-              marginHeight="0"
-              marginWidth="0"
+              // frameBorder="0"
+              // marginHeight="0"
+              // marginWidth="0"
               title="Formulario de confirmación de asistencia"
               style={{
                 width: '100%',
-                minHeight: '1200px',
-                border: 'none',
+                minHeight: '958px',
+                // border: '1px solid #ccc',
                 display: 'block',
+                overflow: 'hidden',
               }}
             >
               Cargando formulario...
@@ -42,24 +66,62 @@ const Invitacion = () => {
           </div>
         </section>
 
-        <section className="invitation-links">
-          <h2>Información Importante</h2>
-          <p>
-            Para conocer todos los detalles sobre la ceremonia, cómo llegar y
-            horarios, podéis visitar:
+        <section
+          className="invitation-links"
+          style={{
+            marginTop: '30px',
+            background: 'rgba(255,255,255,0.9)',
+            padding: '20px',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(139, 107, 93, 0.1)',
+          }}
+        >
+          <p style={{ fontSize: '17px', marginBottom: '20px' }}>
+            Para conocer todos los detalles sobre la ceremonia y cómo llegar: 🏰
           </p>
           <p className="link-container">
-            <Link to="/ceremonia" className="page-link">
+            <Link
+              to="/ceremonia"
+              className="page-link"
+              style={{
+                display: 'inline-block',
+                padding: '12px 24px',
+                background: 'rgba(139, 107, 93, 0.1)',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                color: '#8B6B5D',
+                fontWeight: '500',
+                transition: 'all 0.3s ease',
+              }}
+            >
               Detalles de la Ceremonia
             </Link>
           </p>
 
-          <p>
-            Para información sobre el banquete, la fiesta y opciones de
-            alojamiento:
+          <p
+            style={{
+              fontSize: '17px',
+              marginTop: '25px',
+              marginBottom: '20px',
+            }}
+          >
+            Para información sobre el banquete y la fiesta: 🎊
           </p>
           <p className="link-container">
-            <Link to="/celebracion" className="page-link">
+            <Link
+              to="/celebracion"
+              className="page-link"
+              style={{
+                display: 'inline-block',
+                padding: '12px 24px',
+                background: 'rgba(139, 107, 93, 0.1)',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                color: '#8B6B5D',
+                fontWeight: '500',
+                transition: 'all 0.3s ease',
+              }}
+            >
               Detalles de la Celebración
             </Link>
           </p>

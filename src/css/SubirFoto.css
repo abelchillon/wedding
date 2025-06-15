@@ -20,7 +20,7 @@
   justify-content: center;
   gap: 0.5rem;
   background: #8b6b5d;
-  color: #fff;
+  color: #8B6B5D;
   border: none;
   border-radius: 12px;
   padding: 1rem;
@@ -32,6 +32,7 @@
 
 .upload-button:hover {
   background: #725648;
+  color: #fff;
 }
 
 .upload-button:active {

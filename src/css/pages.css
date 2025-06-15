@@ -30,6 +30,7 @@
   backface-visibility: hidden;
 }
 
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -309,6 +310,7 @@ img {
   padding: 0;
   background-color: transparent;
   border-radius: 12px;
+
 }
 
 .form-container iframe {

@@ -92,7 +92,178 @@ const Fotos = () => {
 
   return (
     <div className="page-container">
-      {/* Modal para imagen ampliada con navegación */}
+      <div className="page-content">
+        <section
+          style={{
+            background: 'rgba(255,255,255,0.9)',
+            padding: '25px',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(139, 107, 93, 0.1)',
+            marginBottom: '30px',
+            textAlign: 'center',
+          }}
+        >
+          <h2 style={{ color: '#8B6B5D' }}>Galería de Fotos 📸</h2>
+          <p
+            style={{
+              fontSize: '17px',
+              lineHeight: '1.6',
+              marginBottom: '20px',
+            }}
+          >
+            ¡Ayúdanos a capturar todos los momentos especiales! Sube tus fotos y
+            comparte la alegría con todos los invitados. 🎉
+          </p>
+
+          <div
+            style={{
+              background: 'rgba(139, 107, 93, 0.1)',
+              padding: '20px',
+              borderRadius: '8px',
+              marginBottom: '20px',
+            }}
+          >
+            <h3
+              style={{
+                color: '#8B6B5D',
+                marginBottom: '15px',
+              }}
+            >
+              Sube tus fotos aquí 📱
+            </h3>
+            <PhotoUploader
+              ref={photoUploaderRef}
+              onSuccess={() => {
+                getFotosCloudinary()
+                  .then(setFotos)
+                  .catch((err) => setError(err.message));
+              }}
+            />
+          </div>
+
+          <div
+            style={{
+              marginTop: '25px',
+              textAlign: 'center',
+            }}
+          >
+            <h3
+              style={{
+                color: '#8B6B5D',
+                marginBottom: '15px',
+              }}
+            >
+              ¿Prefieres usar tu móvil? 📱
+            </h3>
+            <p
+              style={{
+                fontSize: '16px',
+                marginBottom: '15px',
+                textAlign: 'center',
+              }}
+            >
+              Escanea este código QR para abrir la cámara directamente:
+            </p>
+            <div
+              style={{
+                display: 'inline-block',
+                background: 'white',
+                padding: '15px',
+                borderRadius: '8px',
+                boxShadow: '0 2px 8px rgba(139, 107, 93, 0.1)',
+              }}
+            >
+              <QRCodeCanvas
+                value={window.location.href + '?camera=1'}
+                size={200}
+                level="H"
+                style={{ display: 'block' }}
+              />
+            </div>
+          </div>
+        </section>
+
+        <section
+          style={{
+            background: 'rgba(255,255,255,0.9)',
+            padding: '25px',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(139, 107, 93, 0.1)',
+          }}
+        >
+          <h2
+            style={{
+              color: '#8B6B5D',
+              textAlign: 'center',
+              marginBottom: '20px',
+            }}
+          >
+            Galería compartida ✨
+          </h2>
+
+          {loading && (
+            <p style={{ textAlign: 'center', color: '#8B6B5D' }}>
+              Cargando fotos... ⌛
+            </p>
+          )}
+
+          {error && (
+            <p
+              style={{
+                textAlign: 'center',
+                color: '#e74c3c',
+                background: 'rgba(231, 76, 60, 0.1)',
+                padding: '10px',
+                borderRadius: '8px',
+              }}
+            >
+              Error al cargar las fotos: {error} 😢
+            </p>
+          )}
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+              gap: '15px',
+              padding: '10px',
+            }}
+          >
+            {fotos.map((foto, idx) => (
+              <img
+                key={foto.public_id}
+                src={foto.secure_url}
+                alt={`Foto ${idx + 1}`}
+                style={{
+                  width: '100%',
+                  aspectRatio: '1',
+                  objectFit: 'cover',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  transition: 'transform 0.3s ease',
+                  '&:hover': {
+                    transform: 'scale(1.02)',
+                  },
+                }}
+                onClick={() => handleImageClick(idx)}
+              />
+            ))}
+          </div>
+
+          {fotos.length === 0 && !loading && !error && (
+            <p
+              style={{
+                textAlign: 'center',
+                color: '#8B6B5D',
+                fontSize: '16px',
+              }}
+            >
+              ¡Sé el primero en subir una foto! 🎊
+            </p>
+          )}
+        </section>
+      </div>
+
       {modalImgIdx !== null && (
         <div
           style={{
@@ -101,7 +272,7 @@ const Fotos = () => {
             left: 0,
             width: '100vw',
             height: '100vh',
-            background: 'rgba(0,0,0,0.85)',
+            background: 'rgba(0,0,0,0.9)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -109,181 +280,34 @@ const Fotos = () => {
           }}
           onClick={handleCloseModal}
         >
-          {/* Botón anterior */}
-          {fotos.length > 1 && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setModalImgIdx((modalImgIdx - 1 + fotos.length) % fotos.length);
-              }}
-              style={{
-                position: 'absolute',
-                left: 24,
-                top: '50%',
-                transform: 'translateY(-50%)',
-                fontSize: 48,
-                color: '#fff',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                zIndex: 1001,
-                padding: 0,
-                lineHeight: 1,
-                userSelect: 'none',
-              }}
-              aria-label="Anterior"
-            >
-              ‹
-            </button>
-          )}
           <img
-            src={fotos[modalImgIdx]?.url}
-            alt="Foto ampliada"
+            src={fotos[modalImgIdx].secure_url}
+            alt={`Foto ${modalImgIdx + 1}`}
             style={{
               maxWidth: '90vw',
               maxHeight: '90vh',
-              borderRadius: 16,
-              boxShadow: '0 4px 32px #0008',
-              background: '#fff',
+              objectFit: 'contain',
+              borderRadius: '8px',
             }}
             onClick={(e) => e.stopPropagation()}
           />
-          {/* Botón siguiente */}
-          {fotos.length > 1 && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setModalImgIdx((modalImgIdx + 1) % fotos.length);
-              }}
-              style={{
-                position: 'absolute',
-                right: 24,
-                top: '50%',
-                transform: 'translateY(-50%)',
-                fontSize: 48,
-                color: '#fff',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                zIndex: 1001,
-                padding: 0,
-                lineHeight: 1,
-                userSelect: 'none',
-              }}
-              aria-label="Siguiente"
-            >
-              ›
-            </button>
-          )}
           <button
             onClick={handleCloseModal}
             style={{
-              position: 'fixed',
-              top: 24,
-              right: 32,
-              fontSize: 32,
-              color: '#fff',
+              position: 'absolute',
+              top: '20px',
+              right: '20px',
               background: 'none',
               border: 'none',
+              color: 'white',
+              fontSize: '24px',
               cursor: 'pointer',
-              zIndex: 1001,
             }}
-            aria-label="Cerrar"
           >
-            ×
+            ✕
           </button>
         </div>
       )}
-      <div className="page-content">
-        <h1 style={{ textAlign: 'center' }}>¡Házte una foto!</h1>
-        <section
-          className="gifts-section"
-          style={{ textAlign: 'center', marginBottom: 32 }}
-        >
-          <h2 style={{ marginTop: '20px' }}>
-            Escanea el QR o usa los botones para subir una foto
-          </h2>
-
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: 16,
-            }}
-          >
-            <QRCodeCanvas
-              value={
-                window.location.origin + window.location.pathname + '?camera=1'
-              }
-              size={180}
-            />
-            <PhotoUploader
-              ref={photoUploaderRef}
-              onPhotoSelected={handlePhotoSelected}
-              onUploadStart={() => setLoading(true)}
-              onUploadComplete={() => setLoading(false)}
-              onError={(error) => setError(error.message)}
-            />
-          </div>
-          <p
-            style={{
-              marginTop: 32,
-              color: '#666',
-              fontSize: 15,
-              textAlign: 'center',
-            }}
-          >
-            ¡Tu foto aparecerá en la galería después de subirla!
-          </p>
-        </section>
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '8px',
-            justifyContent: 'center',
-            padding: '0 8px',
-          }}
-        >
-          {loading ? (
-            <p style={{ width: '100%', textAlign: 'center' }}>
-              Cargando fotos...
-            </p>
-          ) : error ? (
-            <p style={{ width: '100%', textAlign: 'center', color: 'red' }}>
-              {error}
-            </p>
-          ) : fotos.length > 0 ? (
-            fotos.map((img, idx) => (
-              <span key={img.public_id} style={{ display: 'inline-block' }}>
-                <img
-                  src={img.thumb}
-                  alt={img.public_id}
-                  style={{
-                    width: 'calc(20vw - 10px)',
-                    height: 'calc(20vw - 10px)',
-                    maxWidth: 150,
-                    maxHeight: 150,
-                    minWidth: 100,
-                    minHeight: 100,
-                    objectFit: 'cover',
-                    borderRadius: 8,
-                    cursor: 'pointer',
-                    transition: 'box-shadow 0.2s',
-                    boxShadow: '0 2px 8px #0001',
-                  }}
-                  onClick={() => handleImageClick(idx)}
-                />
-              </span>
-            ))
-          ) : (
-            <p style={{ width: '100%', textAlign: 'center' }}>
-              No hay fotos aún. ¡Sé el primero en subir una!
-            </p>
-          )}
-        </div>
-      </div>
     </div>
   );
 };

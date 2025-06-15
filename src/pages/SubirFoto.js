@@ -106,118 +106,191 @@ const SubirFoto = () => {
   return (
     <div className="page-container">
       <div className="page-content">
-        <div className="upload-container">
-          <h2>Comparte tus fotos de la boda</h2>
+        <section
+          style={{
+            background: 'rgba(255,255,255,0.9)',
+            padding: '25px',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(139, 107, 93, 0.1)',
+            marginBottom: '30px',
+            textAlign: 'center',
+          }}
+        >
+          <h2 style={{ color: '#8B6B5D' }}>Compartir Fotos 📸</h2>
+          <p
+            style={{
+              fontSize: '17px',
+              lineHeight: '1.6',
+              marginBottom: '20px',
+            }}
+          >
+            ¡Ayúdanos a crear un álbum lleno de momentos especiales! Comparte
+            tus fotos y forma parte de nuestros recuerdos. ✨
+          </p>
 
-          {!selectedFile && (
-            <div className="upload-options">
-              <button className="upload-button" onClick={openCamera}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+          <div
+            style={{
+              background: 'rgba(139, 107, 93, 0.1)',
+              padding: '20px',
+              borderRadius: '8px',
+              marginBottom: '20px',
+            }}
+          >
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileSelect}
+              ref={fileInputRef}
+              style={{ display: 'none' }}
+            />
 
-                  <path
-                    fillRule="evenodd"
-                    d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Hacer una foto
+            {!preview ? (
+              <button
+                onClick={() => fileInputRef.current.click()}
+                style={{
+                  background: '#8B6B5D',
+                  color: 'white',
+                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  fontSize: '16px',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    background: '#7A5D50',
+                  },
+                }}
+              >
+                Seleccionar Foto 🖼️
               </button>
-
-              <button className="upload-button" onClick={openFileSelector}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
+            ) : (
+              <div style={{ marginBottom: '20px' }}>
+                <img
+                  src={preview}
+                  alt="Vista previa"
+                  style={{
+                    maxWidth: '100%',
+                    maxHeight: '300px',
+                    borderRadius: '8px',
+                    marginBottom: '15px',
+                  }}
+                />
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: '10px',
+                    justifyContent: 'center',
+                  }}
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                Seleccionar foto
-              </button>
+                  <button
+                    onClick={uploadImage}
+                    disabled={loading}
+                    style={{
+                      background: '#8B6B5D',
+                      color: 'white',
+                      border: 'none',
+                      padding: '12px 24px',
+                      borderRadius: '8px',
+                      fontSize: '16px',
+                      cursor: loading ? 'default' : 'pointer',
+                      opacity: loading ? 0.7 : 1,
+                      transition: 'all 0.3s ease',
+                    }}
+                  >
+                    {loading ? 'Subiendo... ⌛' : 'Subir Foto ⬆️'}
+                  </button>
+                  <button
+                    onClick={() => {
+                      setSelectedFile(null);
+                      setPreview(null);
+                      setError(null);
+                    }}
+                    style={{
+                      background: '#e74c3c',
+                      color: 'white',
+                      border: 'none',
+                      padding: '12px 24px',
+                      borderRadius: '8px',
+                      fontSize: '16px',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                    }}
+                  >
+                    Cancelar ❌
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {error && (
+            <div
+              style={{
+                background: 'rgba(231, 76, 60, 0.1)',
+                color: '#e74c3c',
+                padding: '15px',
+                borderRadius: '8px',
+                marginTop: '20px',
+              }}
+            >
+              {error} 😢
             </div>
           )}
 
-          <input
-            type="file"
-            ref={fileInputRef}
-            className="file-input"
-            onChange={handleFileSelect}
-            accept="image/*"
-          />
-
-          {preview && (
-            <>
-              <div className="preview-container">
-                <img src={preview} alt="Preview" className="preview-image" />
-              </div>
-
-              <div className="upload-options">
-                <button className="upload-button" onClick={uploadImage}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.5 3.75a6 6 0 00-5.98 6.496A5.25 5.25 0 006.75 20.25H18a4.5 4.5 0 002.206-8.423 3.75 3.75 0 00-4.133-4.303A6.001 6.001 0 0010.5 3.75zm2.03 5.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l1.72-1.72v4.94a.75.75 0 001.5 0v-4.94l1.72 1.72a.75.75 0 101.06-1.06l-3-3z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  Subir foto
-                </button>
-
-                <button
-                  className="upload-button"
-                  onClick={() => {
-                    setSelectedFile(null);
-
-                    setPreview(null);
-                  }}
-                  style={{ background: '#dc3545' }}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  Cancelar
-                </button>
-              </div>
-            </>
-          )}
-
-          {error && <p className="error-message">{error}</p>}
-
           {success && (
-            <p className="success-message">
-              ¡Foto subida correctamente! Redirigiendo a la galería...
-            </p>
+            <div
+              style={{
+                background: 'rgba(46, 204, 113, 0.1)',
+                color: '#27ae60',
+                padding: '15px',
+                borderRadius: '8px',
+                marginTop: '20px',
+              }}
+            >
+              ¡Foto subida con éxito! 🎉
+            </div>
           )}
-        </div>
+        </section>
+
+        <section
+          style={{
+            background: 'rgba(255,255,255,0.9)',
+            padding: '25px',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(139, 107, 93, 0.1)',
+            textAlign: 'center',
+          }}
+        >
+          <h3
+            style={{
+              color: '#8B6B5D',
+              marginBottom: '15px',
+            }}
+          >
+            ¿Prefieres usar tu móvil? 📱
+          </h3>
+          <p
+            style={{
+              fontSize: '16px',
+              lineHeight: '1.6',
+            }}
+          >
+            También puedes abrir la cámara directamente desde la{' '}
+            <a
+              href="/fotos"
+              style={{
+                color: '#8B6B5D',
+                textDecoration: 'none',
+                fontWeight: '500',
+                borderBottom: '1px solid',
+              }}
+            >
+              galería de fotos
+            </a>
+            .
+          </p>
+        </section>
       </div>
-
-      {loading && (
-        <div className="loading-overlay">
-          <div className="loading-spinner"></div>
-
-          <p>Subiendo foto...</p>
-        </div>
-      )}
     </div>
   );
 };
