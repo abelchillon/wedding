@@ -279,7 +279,7 @@ const Alojamiento = () => {
           </p>
         </section>
         <section className="rsvp-section">
-          <h2>¡Tu habitación te espera! 🏨✨</h2>
+          <h2>¡Tu habitación te espera! 🏨</h2>
           <p>
             Hemos preparado todo para que disfrutes de una estancia maravillosa
             en el Hotel Urbisol. Aquí podrás relajarte y disfrutar al máximo de

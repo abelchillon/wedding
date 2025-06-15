@@ -198,7 +198,7 @@ const Fotos = () => {
               marginBottom: '20px',
             }}
           >
-            Galería compartida ✨
+            Galería compartida
           </h2>
 
           {loading && (
@@ -232,7 +232,7 @@ const Fotos = () => {
             {fotos.map((foto, idx) => (
               <img
                 key={foto.public_id}
-                src={foto.secure_url}
+                src={foto.thumb}
                 alt={`Foto ${idx + 1}`}
                 style={{
                   width: '100%',
@@ -281,7 +281,7 @@ const Fotos = () => {
           onClick={handleCloseModal}
         >
           <img
-            src={fotos[modalImgIdx].secure_url}
+            src={fotos[modalImgIdx].url}
             alt={`Foto ${modalImgIdx + 1}`}
             style={{
               maxWidth: '90vw',
