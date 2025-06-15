@@ -52,7 +52,7 @@ const Celebracion = () => {
                   color: '#8B6B5D',
                 }}
               >
-                🕢 Comienza a las <b>19:30h</b>
+                🕢 Comienza a las <b>19:00h</b>
                 <br />
                 📅 Sábado, 2 de Agosto de 2025
               </span>
