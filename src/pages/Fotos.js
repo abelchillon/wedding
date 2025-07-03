@@ -90,6 +90,35 @@ const Fotos = () => {
     }
   };
 
+  // Soporte para swipe en el modal
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.changedTouches[0].screenX;
+  };
+
+  const handleTouchEnd = (e) => {
+    touchEndX.current = e.changedTouches[0].screenX;
+    handleSwipe();
+  };
+
+  const handleSwipe = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+    const diff = touchStartX.current - touchEndX.current;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        // Swipe left: siguiente
+        setModalImgIdx((modalImgIdx + 1) % fotos.length);
+      } else {
+        // Swipe right: anterior
+        setModalImgIdx((modalImgIdx - 1 + fotos.length) % fotos.length);
+      }
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   return (
     <div className="page-container">
       <div className="page-content">
@@ -279,6 +308,8 @@ const Fotos = () => {
             zIndex: 1000,
           }}
           onClick={handleCloseModal}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           <button
             onClick={(e) => {
