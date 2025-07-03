@@ -141,7 +141,7 @@ const Fotos = () => {
             />
           </div>
 
-          <div
+          {/* <div
             style={{
               marginTop: '25px',
               textAlign: 'center',
@@ -180,7 +180,7 @@ const Fotos = () => {
                 style={{ display: 'block' }}
               />
             </div>
-          </div>
+          </div> */}
         </section>
 
         <section
@@ -224,8 +224,8 @@ const Fotos = () => {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-              gap: '15px',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))',
+              gap: '10px',
               padding: '10px',
             }}
           >
@@ -238,7 +238,7 @@ const Fotos = () => {
                   width: '100%',
                   aspectRatio: '1',
                   objectFit: 'cover',
-                  borderRadius: '8px',
+                  borderRadius: '4px',
                   cursor: 'pointer',
                   transition: 'transform 0.3s ease',
                   '&:hover': {
@@ -280,6 +280,24 @@ const Fotos = () => {
           }}
           onClick={handleCloseModal}
         >
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setModalImgIdx((modalImgIdx - 1 + fotos.length) % fotos.length);
+            }}
+            style={{
+              position: 'absolute',
+              left: '20px',
+              background: 'none',
+              border: 'none',
+              color: 'white',
+              fontSize: '24px',
+              cursor: 'pointer',
+            }}
+          >
+            ‹
+          </button>
+
           <img
             src={fotos[modalImgIdx].url}
             alt={`Foto ${modalImgIdx + 1}`}
@@ -291,6 +309,25 @@ const Fotos = () => {
             }}
             onClick={(e) => e.stopPropagation()}
           />
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setModalImgIdx((modalImgIdx + 1) % fotos.length);
+            }}
+            style={{
+              position: 'absolute',
+              right: '20px',
+              background: 'none',
+              border: 'none',
+              color: 'white',
+              fontSize: '24px',
+              cursor: 'pointer',
+            }}
+          >
+            ›
+          </button>
+
           <button
             onClick={handleCloseModal}
             style={{
